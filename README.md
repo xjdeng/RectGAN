@@ -1,2 +1,2 @@
 # RectGAN
-The first Generative Adversarial Network that generates rectangular images to be published to Github
+The World's First Generative Adversarial Network that generates rectangular images to be published to Github
