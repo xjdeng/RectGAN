@@ -20,6 +20,7 @@ from args import Args
 from data import denormalize4gan
 from layers import bilinear2x
 from discrimination import MinibatchDiscrimination
+import aspect_ratio as ar
 
 #import tensorflow as tf
 #import keras
@@ -131,8 +132,6 @@ def build_discriminator( shape, build_disc=True ) :
 
     x = conv2d( x, 128*factor2) #128
     # 16x16
-    x = conv2d( x, 128*factor2)
-    x = conv2d( x, 256*factor2)
 
     x = conv2d( x, 256*factor2) #256
     # 8x8
@@ -226,6 +225,8 @@ def build_gen_old( shape ) :
 
 
 def build_gen( shape ) :
+    st = ar.get_strides(Args.w, Args.h)
+    ar.validate_dimensions(Args.w, Args.h, st)
     def deconv2d( x, filters, shape=(5, 5), mystrides = (2, 2)) :
         '''
         Conv2DTransposed gives me checkerboard artifact...
@@ -263,11 +264,9 @@ def build_gen( shape ) :
     x = BatchNormalization(momentum=Args.bn_momentum)( x )
     #x = LeakyReLU(alpha=Args.alpha_G)( x )
     x = ReLU()(x)
-    x = deconv2d( x, 256*factor2, mystrides = (2,1))
-    x = deconv2d( x, 256*factor2, mystrides = (2,2))
-    x = deconv2d( x, 128*factor2, mystrides = (2,2))
-    x = deconv2d( x, 128*factor2, mystrides = (2,2))
-    x = deconv2d( x, 64*factor2, mystrides = (2,1))
+    x = deconv2d( x, 256*factor2, mystrides = st[0])
+    x = deconv2d( x, 128*factor2, mystrides = st[1])
+    x = deconv2d( x, 64*factor2, mystrides = st[2])
     # 4x4
 
     #x = deconv2d( x, 256*factor2, mystrides = (4,2))

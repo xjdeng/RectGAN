@@ -96,7 +96,7 @@ if __name__ == "__main__" :
     #make_hdf5("data.hdf5", "animeface-character-dataset/thumb/*/*.png")
     #make_hdf5("data.hdf5", "animeface-character-dataset/thumb/*/*.jpg")
     #make_hdf5("data.hdf5", "animeface-character-dataset/thumb/025*/*.png")
-    make_hdf5("data.hdf5", "j:/hep/sk/done_front/*/*.jpg")
+    make_hdf5("data.hdf5", Args.data_dir + "*/*.jpg")
     
     # Uncomment and run test, if you want.
     test("data.hdf5")
