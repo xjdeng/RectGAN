@@ -7,7 +7,7 @@ class Args :
     # Archive outputs of training here for animating later.
     anim_dir = "anim"
     
-    data_dir = "d:/jj/python/test_results3"
+    data_dir = "j:/hep/sk/done_front/"
     
     """
     
