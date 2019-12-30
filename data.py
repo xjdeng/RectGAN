@@ -2,9 +2,10 @@
 import glob
 import h5py
 import numpy as np
-import scipy.misc
+#import scipy.misc
 import random
 import cv2
+
 
 from args import Args
 
@@ -64,8 +65,10 @@ def make_hdf5(ofname, wildcard):
 
         for i, fname in enumerate(fnames):
             print(fname)
-            im = scipy.misc.imread(fname, mode='RGB') # some have alpha channel
-            im = scipy.misc.imresize(im, (Args.h, Args.w))
+            #im = scipy.misc.imread(fname, mode='RGB') # some have alpha channel
+            #im = scipy.misc.imresize(im, (Args.h, Args.w))
+            im = cv2.imread(fname)
+            im = cv2.resize(im,(Args.w, Args.h))
             im2 = np.fliplr(im)
             faces[2*i] = normalize4gan(im)
             faces[2*i + 1] = normalize4gan(im2)
@@ -97,6 +100,7 @@ if __name__ == "__main__" :
     #make_hdf5("data.hdf5", "animeface-character-dataset/thumb/*/*.jpg")
     #make_hdf5("data.hdf5", "animeface-character-dataset/thumb/025*/*.png")
     make_hdf5("data.hdf5", Args.data_dir + "*/*.jpg")
+    #make_hdf5("data.hdf5", Args.data_dir + "*.jpg")
     
     # Uncomment and run test, if you want.
     test("data.hdf5")

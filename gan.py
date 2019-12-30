@@ -8,7 +8,8 @@ from keras import optimizers
 from keras.layers import Input
 from keras.optimizers import Adam, Adagrad, Adadelta, Adamax, SGD
 from keras.callbacks import CSVLogger
-import scipy
+#import scipy
+import cv2
 import h5py
 from args import Args
 from data import denormalize4gan
@@ -80,7 +81,8 @@ def dump_batch(imgs, cnt, ofname):
     alles = np.concatenate( rows, axis=0 )
     alles = denormalize4gan( alles )
     #alles = scipy.misc.imresize(alles, 200) # uncomment to scale
-    scipy.misc.imsave( ofname, alles )
+    #scipy.misc.imsave( ofname, alles )
+    cv2.imwrite(ofname, alles)
 
 
 
@@ -321,7 +323,8 @@ def generate( genw, cnt ):
 
     for i in range(cnt):
         ofname = "{:04d}.png".format(i)
-        scipy.misc.imsave( ofname, generated[i] )
+        #scipy.misc.imsave( ofname, generated[i] )
+        cv2.imwrite( ofname, generated[i] )
 
 
 
