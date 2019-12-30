@@ -20,7 +20,7 @@ Although they're nowhere near the [photo-quality faces that Nvidia generated](ht
   - **w and h**: width and height that the image should be resized to.  See the comments for valid width and height combos.
 - Generate data.hdf5: after editing args.py, you should run ```python data.py``` to generate data.hdf5.
 - Train the GAN: simply run the following: ```python gan.py``` and watch the images appear in the **anim** directory (or whatever directory you set in args.py)
-- If you stopped the training and want to restart, run the following: ```python -c "import gan; gan.train_gan('data.hdf5', 1000000, 20, True)" and training will resume, but the numbering of the images generated in the destination folder will reset.
+- If you stopped the training and want to restart, run the following: ```python -c "import gan; gan.train_gan('data.hdf5', 1000000, 20, True)"``` and training will resume, but the numbering of the images generated in the destination folder will reset.
 
 ## Further Aspirations:
 
